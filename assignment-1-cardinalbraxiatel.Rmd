@@ -101,7 +101,20 @@ print(I)
 calc_interest(n = 10, P = 100)
 ```
 
+#4.1.2.5
+```{r, 4.1.2.5}
+cal_mort <- function(n = 36, P = 250000, open = TRUE){
 
+if(open == TRUE){i <- 0.005} else {i <- 0.004}
+  
+R <- (P*i)/(1-(1+i)^(-n))
+
+print(R)
+
+}
+
+cal_mort()
+```
 
 
 
