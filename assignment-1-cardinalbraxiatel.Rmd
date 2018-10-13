@@ -89,8 +89,17 @@ for (j in 1:15) answer <- c(answer, (7*answer[j])%%31)
 print(answer)
 ```
 
+#4.1.2.4
+```{r, 4.1.2.4}
+calc_interest <- function(n = 3, P = 1000){
 
+if(n <= 3){i <- 0.04} else {i<-0.05}
+  I = P*(((1+i)^n)-1)
+print(I)
+}
 
+calc_interest(n = 10, P = 100)
+```
 
 
 
