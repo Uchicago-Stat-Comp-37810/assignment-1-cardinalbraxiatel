@@ -8,8 +8,8 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-```{r 4.1.1.2}
+#4.1.1.2.a
+```{r 4.1.1.2.a}
 Fibonacci <- numeric(1000000)
 ratio <- numeric(1000000)
 ratio[1] <- NaN
@@ -21,9 +21,10 @@ for(i in 3:1000){
   ratio[i] <- Fibonacci[i]/Fibonacci[i-1]
 }
 
-
-# sequence appears to converge quite quickly
-
+```
+The sequence appears to converge quite quickly
+#4.1.1.2.b
+```{r 4.1.1.2.b}
 GR <- (1 + sqrt(5))/2
 
 
@@ -34,31 +35,73 @@ for(i in 3:length(Fibonacci)){
     break}}
   plot(2:31, ratio[2:31], main = "Convergence of Nth Fibonacci Ratio", xlab = "N", ylab = "Ratio")
   abline(h = GR)
-  #although not quite a proof, by Johannes Kepler's proof
-  # that the limit of this ratio at the nth observation (as 
-  # n goes to infinity) the ratio will converge to the 
-  # golden ratio. According to R, the floating point differences
-  # between the ratio and the GR vanishes and the series
-  # essentially converges. The line below indicates the Golden Ratio.
+  
+```
+ Although not quite a proof, by Johannes Kepler's proof that the limit of this ratio at the nth observation (as n goes to infinity) the ratio will converge to the golden ratio. According to R, the floating point differences between the ratio and the GR vanishes and the series essentially converges. The line below indicates the Golden Ratio.
 
+#4.1.1.3.a
+This code is the equivalent of the sum function, starting
+from 0. So 0 + 1 + 2 + 3 + 4 + 5 = 15. This is borne out 
+by the code.
+```{r, 4.1.1.3.a}
+answer <- 0
+for(j in 1:5) answer <- answer + j
+print(answer)
 ```
 
-## R Markdown
+#4.1.1.3.b
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+This code first assigns an empty vector to answer. Each time through the loop the c() argument combines the
+vector answer from the last iteration with whatever the current value of j is. This simply leads to a vector
+from 1:5, albeit in a roundabout manner.
+```{r,4.1.1.3.b}
+answer <- NULL
+for( j in 1:5) answer <- c(answer,j)
+print(answer)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+#4.1.1.3.c
+This code is similar to the last one save that it sets the 
+answer variable to zero rather than to the empty set.
+This means that the output vector is 0 to 5.
+```{r,4.1.1.3.c}
+answer <- 0
+for(j in 1:5) answer <- c(answer,j)
+print(answer)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+#4.1.1.3.d
+This code will output a single value which is the 
+equivalent of 5! = 120
+```{r,4.1.1.3.d}
+answer <- 1
+for(j in 1:5) answer <- answer*j
+print(answer)
+```
+
+#4.1.1.4.e
+This code will output a vector that combines the previous answer vector whose first value is 3 and 
+whose 2:15 elements represent the 7*answer[j] mod 31. I do not believe that I would be able to predict 
+the sequence of numbers in a finite amount of time. Perhaps if I had the use of a very clever computer.
+```{r,4.1.1.3.e}
+answer <- 3
+for (j in 1:15) answer <- c(answer, (7*answer[j])%%31)
+print(answer)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
