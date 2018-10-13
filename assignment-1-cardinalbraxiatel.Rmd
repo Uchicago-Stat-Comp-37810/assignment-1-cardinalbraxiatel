@@ -1,0 +1,64 @@
+---
+title: "assignment-1-cardinalbraxiatel"
+author: "Patrick Walker"
+date: "October 13, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r 4.1.1.2}
+Fibonacci <- numeric(1000000)
+ratio <- numeric(1000000)
+ratio[1] <- NaN
+ratio[2] <- 1
+Fibonacci[1] <- 1
+Fibonacci[2] <- 1
+for(i in 3:1000){
+  Fibonacci[i] <- Fibonacci[i - 2] + Fibonacci[i-1]
+  ratio[i] <- Fibonacci[i]/Fibonacci[i-1]
+}
+
+
+# sequence appears to converge quite quickly
+
+GR <- (1 + sqrt(5))/2
+
+
+for(i in 3:length(Fibonacci)){
+  Fibonacci[i] <- Fibonacci[i - 2] + Fibonacci[i-1]
+  ratio[i] <- Fibonacci[i]/Fibonacci[i-1]
+  if(ratio[i]  == GR){print(i) 
+    break}}
+  plot(2:31, ratio[2:31], main = "Convergence of Nth Fibonacci Ratio", xlab = "N", ylab = "Ratio")
+  abline(h = GR)
+  #although not quite a proof, by Johannes Kepler's proof
+  # that the limit of this ratio at the nth observation (as 
+  # n goes to infinity) the ratio will converge to the 
+  # golden ratio. According to R, the floating point differences
+  # between the ratio and the GR vanishes and the series
+  # essentially converges. The line below indicates the Golden Ratio.
+
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
