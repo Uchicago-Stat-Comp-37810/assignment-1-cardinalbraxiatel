@@ -235,6 +235,7 @@ Eratosthenes2 <- function(n) {
   }
   
 }
+Eratosthenes2(100)
 ```
 
 #4.1.5.2.c
@@ -258,11 +259,98 @@ Eratosthenes3 <- function(n) {
      
       
     } 
-    combined <- c(primes,sieves)
+    combined <- c(primes,sieve)
     return(combined)
   } else {
     stop("Input value of n should be at least 2.")
   }
   
 }
+
+Eratosthenes3(100)
 ```
+
+#4.2.1.2.a_and_b
+
+```{r, 4.2.1.2.a_and_b}
+compound.interest <- function(P = 1000, i.r = 1, n = 30){
+  
+  i.r <- i.r/100
+  
+  acc_cap <- P*(1 + i.r)^n
+  
+  return(paste("$", acc_cap))
+}
+compound.interest()
+
+```
+
+#4.2.1.3
+
+This is not perfect, for the life of me I couldn't figure out how to get R to handle a function
+given as an input function, therefore this code requires one to go into the while loop and update
+the function in question manually.
+```{r, 4.2.1.3}
+bi <- function(l = -1,h = 3 ,x = seq(from = l, to = h),func = x - 2){
+ 
+  
+  
+  smallest <- which(func == min(func))
+   
+  largest <- which(func == max(func))
+  
+  if(min(func)*max(func) >= 0){return("F(x)s must have differing signs")}else{
+  
+  
+  lbound <- x[smallest]
+  hbound <- x[largest]
+  
+  print(lbound)
+  print(hbound)
+  mid <- (hbound-lbound)/2
+ 
+  mfunc <- 1
+  
+  while(abs(mfunc) > 0.0001){
+    mid <- (hbound-lbound)/2
+
+mfunc <- 1*mid - 2
+    if(mfunc > 0){hbound <- mid} else {lbound <- mid}
+    
+    
+  }
+  return(mid)
+}
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
