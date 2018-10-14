@@ -181,6 +181,88 @@ while_loop_3 <- function(){
 while_loop_3()
 ```
 
+#4.1.5.2
+The if statment, along with its accompanying else statment, prevents trivial values of n being used.
+Sieve is a vector containing all the numbers from 2 through n. Primes starts as an empty vector. The
+while loop is based on whether or not the length of the sieve vector is still positive. The first entry of sieve is used as p, a test value, which for the first iteration is 2. p is then combined into the previous primes vector. The next line updates sieve by indexing sieve by those entries of sieve that don't have p as a factor. If this process is repeated ad infinitum, all those numbers which are prime will be transfered from sieve into primes, resulting in a zero length sieve, which ends the loop. The function ends by returning the primes vector.
+```{r, 4.1.5.2.a}
+Eratosthenes <- function(n) {
+   # Print prime numbers up to n (based on the sieve of Eratosthenes)
+     if (n >= 2) {                
+       sieve <- seq(2, n)          
+       primes <- c()               
+       while (length(sieve) > 0) { 
+         p <- sieve[1]             
+         primes <- c(primes, p)   
+         sieve <- sieve[(sieve %% p) != 0] 
+         }                                 
+       return(primes) 
+       } else {       
+         stop("Input value of n should be at least 2.") 
+       }
+  
+}
 
+Eratosthenes(100)
 
+```
 
+#4.1.5.2.b
+The below function is esssentially the same but p takes an initial value outside the loop,
+the while loop is based on whether or not p < sqrt(n), and that to return all the prime numbers
+the code combines those prime numbers less than sqrt(n) along with those remaining values of sieve.
+This results in the same output as the previous code.
+```{r 4.1.5.2.b}
+Eratosthenes2 <- function(n) {
+  # Print prime numbers up to n (based on the sieve of Eratosthenes)
+  if (n >= 2) { 
+    sieve <- seq(2, n) 
+    primes <- c() 
+    p <- 2
+    
+    while (p < sqrt(n)) { 
+      
+      
+      primes <- c(primes, p) 
+      sieve <- sieve[(sieve %% p) != 0] 
+      p <- sieve[1] 
+      
+    } 
+    combined <- c(primes,sieve)
+    return(combined)
+  } else {
+    stop("Input value of n should be at least 2.")
+  }
+  
+}
+```
+
+#4.1.5.2.c
+This function functions very similar to the code from part a, the primary modification is that it
+check for p >= sqrt(n) and if its true it breaks the while loop. The primes less than sqrt(n) and the remaining entries of sieve are combined together and returned, again equivalent to the last 
+two sets of code.
+
+```{r,4.1.5.2.c}
+Eratosthenes3 <- function(n) {
+  # Print prime numbers up to n (based on the sieve of Eratosthenes)
+  if (n >= 2) { 
+    sieve <- seq(2, n) 
+    primes <- c() 
+    while (length(sieve) > 0) { 
+      p <- sieve[1] 
+      
+      if(p >= sqrt(n)){break}
+      
+      primes <- c(primes, p) 
+      sieve <- sieve[(sieve %% p) != 0] 
+     
+      
+    } 
+    combined <- c(primes,sieves)
+    return(combined)
+  } else {
+    stop("Input value of n should be at least 2.")
+  }
+  
+}
+```
