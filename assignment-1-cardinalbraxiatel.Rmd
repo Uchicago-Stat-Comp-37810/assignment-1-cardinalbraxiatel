@@ -20,7 +20,7 @@ for(i in 3:1000){
   Fibonacci[i] <- Fibonacci[i - 2] + Fibonacci[i-1]
   ratio[i] <- Fibonacci[i]/Fibonacci[i-1]
 }
-
+print(Fibonacci)
 ```
 The sequence appears to converge quite quickly
 #4.1.1.2.b
@@ -28,10 +28,10 @@ The sequence appears to converge quite quickly
 GR <- (1 + sqrt(5))/2
 
 
-for(i in 3:length(Fibonacci)){
-  Fibonacci[i] <- Fibonacci[i - 2] + Fibonacci[i-1]
-  ratio[i] <- Fibonacci[i]/Fibonacci[i-1]
-  if(ratio[i]  == GR){print(i) 
+for(j in 3:length(Fibonacci)){
+  Fibonacci[j] <- Fibonacci[j - 2] + Fibonacci[j-1]
+  ratio[j] <- Fibonacci[j]/Fibonacci[j-1]
+  if(ratio[j]  == GR){print(j) 
     break}}
   plot(2:31, ratio[2:31], main = "Convergence of Nth Fibonacci Ratio", xlab = "N", ylab = "Ratio")
   abline(h = GR)
@@ -116,11 +116,47 @@ print(R)
 cal_mort()
 ```
 
+#4.1.3.2
+```{r, 4.1.3.2}
+while_loop <- function(){
+
+  Fibonacci <- c(1,1)
+  
+  while(max(Fibonacci) < 300){
+  
+    Fibonacci <- c(Fibonacci, Fibonacci[length(Fibonacci)] + Fibonacci[length(Fibonacci)-1])
+  }
+  print((Fibonacci))
+  
+  print(length(Fibonacci))
+
+}
+
+while_loop()
+
+```
 
 
+#4.1.3.4
+```{r, 4.1.3.4}
+while_loop_2 <- function(){
+  
+  oldi <- 0
+  i <- 0.006
+  
+  while(abs(i - oldi) > 0.000001){
+    
+    oldi <- i
+    
+    i <- (1-(1+oldi)^(-20))/19
+    
+  }
+  print(i)
+  print(oldi)
+}
+while_loop_2()
 
-
-
+```
 
 
 
