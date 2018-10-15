@@ -371,7 +371,7 @@ bi()
        }
 ```
 
-#4.1.1.2
+#4.4.1.2
 Again, I am unfamiliar with how to substitute an equation symbollically into R, so I entered the equations and their derivatives by hand.
 
 x + y = 0
@@ -380,7 +380,7 @@ subbing 1 into 2 gives
 3y^2 = 2
 y=sqrt(2/3) = -x
 sqrt(2/3) = 0.8164966
-```{r, 4.1.1.2}
+```{r, 4.4.1.2}
 Newton <- function(){
   xv <- c(1,1)
   yv <- c(1,1)
@@ -408,8 +408,20 @@ Newton <- function(){
 
 ```
 
-
-
+#CH4.1
+```{r,ch4.1}
+directpoly <- function(x = 2, coe = c(1,2,3)){
+  n <- length(coe)
+  powers <- c(0:(n-1))
+  temp <- c()
+  for(i in 1:n){
+  temp[i] <- coe[i]*x^(powers[i])
+  }
+  
+  return(sum(temp))
+}
+directpoly()
+```
 
 
 
