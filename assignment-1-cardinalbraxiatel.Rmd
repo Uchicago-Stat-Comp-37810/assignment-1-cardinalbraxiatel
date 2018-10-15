@@ -291,7 +291,7 @@ This is not perfect, for the life of me I couldn't figure out how to get R to ha
 given as an input function, therefore this code requires one to go into the while loop and update
 the function in question manually.
 ```{r, 4.2.1.3}
-bi <- function(l = -1,h = 3 ,x = seq(from = l, to = h),func = x - 2){
+bi <- function(l = -1,h = 3 ,x = seq(from = l, to = h),func =(x - 2)){
  
   
   
@@ -305,8 +305,7 @@ bi <- function(l = -1,h = 3 ,x = seq(from = l, to = h),func = x - 2){
   lbound <- x[smallest]
   hbound <- x[largest]
   
-  print(lbound)
-  print(hbound)
+  
   mid <- (hbound-lbound)/2
  
   mfunc <- 1
@@ -315,6 +314,8 @@ bi <- function(l = -1,h = 3 ,x = seq(from = l, to = h),func = x - 2){
     mid <- (hbound-lbound)/2
 
 mfunc <- 1*mid - 2
+    
+  
     if(mfunc > 0){hbound <- mid} else {lbound <- mid}
     
     
@@ -322,6 +323,7 @@ mfunc <- 1*mid - 2
   return(mid)
 }
 }
+bi()
 ```
 
 #4.4.1.1
@@ -369,9 +371,42 @@ mfunc <- 1*mid - 2
        }
 ```
 
+#4.1.1.2
+Again, I am unfamiliar with how to substitute an equation symbollically into R, so I entered the equations and their derivatives by hand.
 
+x + y = 0
+x^2 +2y^2 - 2 = 0 
+subbing 1 into 2 gives
+3y^2 = 2
+y=sqrt(2/3) = -x
+sqrt(2/3) = 0.8164966
+```{r, 4.1.1.2}
+Newton <- function(){
+  xv <- c(1,1)
+  yv <- c(1,1)
+  
+  i <- 2
+  while((x[i]+y[i]) > 0.5 &&  ((x[i])^2 + 2*(y[i])^2 -2) > 0.5){
+   #for(i in 2:30) {
+  fdx <- 1
+  fdy <- 1
+  gdx <- 2*xv[i-1]
+  gdy <- 4*yv[i-1]
+  fn_1 <- xv[i - 1] + yv[i-1]
+  gn_1 <- (xv[i-1])^2 +2*(yv[i -1])^2 - 2
+  dn_1 = 1*gdy - 1*gdx
+  
+   xv[i] <- xv[i-1]-(gdy*fn_1 - fdy*gn_1)/dn_1
+   yv[i] <- yv[i-1]-(fdx*gn_1 - gdx*fn_1)/dn_1
+   i <- i + 1
+   
+   if(i == 30){break}
+    }
+ print(xv[length(xv)]) 
+ print(yv[length(yv)])
+}
 
-
+```
 
 
 
