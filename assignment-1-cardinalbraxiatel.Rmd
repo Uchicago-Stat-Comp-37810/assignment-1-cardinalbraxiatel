@@ -287,43 +287,36 @@ compound.interest()
 
 #4.2.1.3
 
-This is not perfect, for the life of me I couldn't figure out how to get R to handle a function
-given as an input function, therefore this code requires one to go into the while loop and update
-the function in question manually.
-```{r, 4.2.1.3}
-bi <- function(l = -1,h = 3 ,x = seq(from = l, to = h),func =(x - 2)){
- 
-  
-  
-  smallest <- which(func == min(func))
-   
-  largest <- which(func == max(func))
-  
-  if(min(func)*max(func) >= 0){return("F(x)s must have differing signs")}else{
-  
-  
-  lbound <- x[smallest]
-  hbound <- x[largest]
-  
-  
-  mid <- (hbound-lbound)/2
- 
-  mfunc <- 1
-  
-  while(abs(mfunc) > 0.0001){
-    mid <- (hbound-lbound)/2
 
-mfunc <- 1*mid - 2
-    
+```{r, 4.2.1.3}
+func <- function(x){x-1}
+bi <- function(l = -1,h = 3 ,x = seq(from = l, to = h)){
   
-    if(mfunc > 0){hbound <- mid} else {lbound <- mid}
+ if(func(h) > 0){(hbound <- h) && (lbound <- l)} else {(lbound <- h) && (hbound <- l)}
+  
+  if(func(l)*func(h) >= 0){return("F(x)s must have differing signs")}else{
+    mfunc <- 1
+        while(abs(mfunc) > 0.0000001){
     
-    
+      mid <- (hbound-lbound)/2
+     
+      
+      
+      mfunc <- func(mid)
+      
+      
+      
+      if(mfunc > 0){hbound <- mid} else {lbound <- mid}
+      
+      
+    }
+    return(mid)
   }
-  return(mid)
+  
 }
-}
+
 bi()
+
 ```
 
 #4.4.1.1
