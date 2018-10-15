@@ -423,6 +423,24 @@ directpoly <- function(x = 2, coe = c(1,2,3)){
 directpoly()
 ```
 
+#4.4.1.2
+```{r, 4.4.1.2}
+hornerpoly <- function(x = c(2,3), coe = c(1,2,3)){
+  n <- length(coe)
+  a <- matrix(nrow = n,ncol = length(x))
+  a[n,] <- coe[n]
+  
+  for(z in 1:length(x)){
+  for(j in 1:(n-1)){
+    a[n-j,z] <- x[z]*a[n-j+1] + coe[n-j]
+  }
+  
+  }
+  a1s <- (a[1,])
+  return(a1s)
+}
+hornerpoly()
+```
 
 
 
