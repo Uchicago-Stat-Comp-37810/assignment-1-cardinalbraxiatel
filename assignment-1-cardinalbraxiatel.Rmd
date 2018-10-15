@@ -442,7 +442,7 @@ hornerpoly <- function(x = c(2,3), coe = c(1,2,3)){
 hornerpoly()
 ```
 
-
+#4.4.1.3
 
 
 
