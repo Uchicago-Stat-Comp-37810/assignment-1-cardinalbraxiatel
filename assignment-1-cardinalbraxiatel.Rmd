@@ -4,7 +4,7 @@ author: "Patrick Walker"
 date: "October 13, 2018"
 output: html_document
 ---
-
+#all my problems are from the 2007 edition.
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -20,7 +20,7 @@ for(i in 3:1000){
   Fibonacci[i] <- Fibonacci[i - 2] + Fibonacci[i-1]
   ratio[i] <- Fibonacci[i]/Fibonacci[i-1]
 }
-print(Fibonacci)
+return(head(Fibonacci))
 ```
 The sequence appears to converge quite quickly
 #4.1.1.2.b
@@ -37,6 +37,7 @@ for(j in 3:length(Fibonacci)){
   abline(h = GR)
   
 ```
+ 
  Although not quite a proof, by Johannes Kepler's proof that the limit of this ratio at the nth observation (as n goes to infinity) the ratio will converge to the golden ratio. According to R, the floating point differences between the ratio and the GR vanishes and the series essentially converges. The line below indicates the Golden Ratio.
 
 #4.1.1.3.a
@@ -46,7 +47,7 @@ by the code.
 ```{r, 4.1.1.3.a}
 answer <- 0
 for(j in 1:5) answer <- answer + j
-print(answer)
+return(answer)
 ```
 
 #4.1.1.3.b
@@ -57,7 +58,7 @@ from 1:5, albeit in a roundabout manner.
 ```{r,4.1.1.3.b}
 answer <- NULL
 for( j in 1:5) answer <- c(answer,j)
-print(answer)
+return(answer)
 ```
 
 #4.1.1.3.c
@@ -67,7 +68,7 @@ This means that the output vector is 0 to 5.
 ```{r,4.1.1.3.c}
 answer <- 0
 for(j in 1:5) answer <- c(answer,j)
-print(answer)
+return(answer)
 ```
 
 #4.1.1.3.d
@@ -76,7 +77,7 @@ equivalent of 5! = 120
 ```{r,4.1.1.3.d}
 answer <- 1
 for(j in 1:5) answer <- answer*j
-print(answer)
+return(answer)
 ```
 
 #4.1.1.4.e
@@ -86,7 +87,7 @@ the sequence of numbers in a finite amount of time. Perhaps if I had the use of 
 ```{r,4.1.1.3.e}
 answer <- 3
 for (j in 1:15) answer <- c(answer, (7*answer[j])%%31)
-print(answer)
+return(answer)
 ```
 
 #4.1.2.4
@@ -95,7 +96,7 @@ calc_interest <- function(n = 3, P = 1000){
 
 if(n <= 3){i <- 0.04} else {i<-0.05}
   I = P*(((1+i)^n)-1)
-print(I)
+return(I)
 }
 
 calc_interest(n = 10, P = 100)
@@ -109,7 +110,7 @@ if(open == TRUE){i <- 0.005} else {i <- 0.004}
   
 R <- (P*i)/(1-(1+i)^(-n))
 
-print(R)
+return(R)
 
 }
 
@@ -128,7 +129,7 @@ while_loop <- function(){
   }
   print((Fibonacci))
   
-  print(length(Fibonacci))
+  return(length(Fibonacci))
 
 }
 
@@ -151,8 +152,8 @@ while_loop_2 <- function(){
     i <- (1-(1+oldi)^(-20))/19
     
   }
-  print(i)
-  print(oldi)
+  return(i)
+  
 }
 while_loop_2()
 
@@ -175,8 +176,8 @@ while_loop_3 <- function(){
     numb <- numb + 1
   }
   print(i)
-  print(oldi)
-  print(numb)
+  
+  return(numb)
 }
 while_loop_3()
 ```
@@ -365,7 +366,7 @@ bi()
 ```
 
 #4.4.1.2
-Again, I am unfamiliar with how to substitute an equation symbollically into R, so I entered the equations and their derivatives by hand.
+
 
 x + y = 0
 x^2 +2y^2 - 2 = 0 
@@ -374,30 +375,59 @@ subbing 1 into 2 gives
 y=sqrt(2/3) = -x
 sqrt(2/3) = 0.8164966
 ```{r, 4.4.1.2}
+f <- function(x,y){x+y}            #function 1 requires use input of function
+fe <- expression(x+y)              #fe uses the same function as above, but requires conversion
+g <- function(x,y){x^2 + 2*y^2 -2} #similar to above but for g
+ge <- expression(x^2 + 2*y^2 -2)
+
 Newton <- function(){
-  xv <- c(1,1)
+  xv <- c(1,1)                    #creates vectors for x and y
   yv <- c(1,1)
   
-  i <- 2
-  while((x[i]+y[i]) > 0.5 &&  ((x[i])^2 + 2*(y[i])^2 -2) > 0.5){
-   #for(i in 2:30) {
-  fdx <- 1
-  fdy <- 1
-  gdx <- 2*xv[i-1]
-  gdy <- 4*yv[i-1]
-  fn_1 <- xv[i - 1] + yv[i-1]
-  gn_1 <- (xv[i-1])^2 +2*(yv[i -1])^2 - 2
-  dn_1 = 1*gdy - 1*gdx
   
-   xv[i] <- xv[i-1]-(gdy*fn_1 - fdy*gn_1)/dn_1
-   yv[i] <- yv[i-1]-(fdx*gn_1 - gdx*fn_1)/dn_1
-   i <- i + 1
+  fdx <- D(fe,"x")               # takes derivatives of above according to Newton's method
+  fdy <- D(fe, "y")
+  gdx <- D(ge, "x")
+  gdy <- D(ge, "y")
+  
+iff <- abs(f(xv[1],yv[1])) + abs(g(xv[1],yv[1])) # variable that will be used in while loop
+  
+  i <- 2                                      #counter for vectors since this is a while loop
+  
+  while((iff) > 0.00001){
    
-   if(i == 30){break}
-    }
- print(xv[length(xv)]) 
- print(yv[length(yv)])
+    x <- xv[i-1]                #creates useful values for x and y, i-1th entry
+    
+    y <- yv[i-1]
+    
+    
+    fxn1 <- eval(fdx)          #evaluates above derivatives using x and y from above
+    
+    fyn1 <- eval(fdy)
+    
+    gxn1 <- eval(gdx)
+    
+    gyn1 <- eval(gdy)
+   
+    
+    fn_1 <- f(xv[i-1],yv[i-1])    # various functions evaluated at i-1
+    gn_1 <- g(xv[i-1],yv[i-1])
+    dn_1 = fxn1*gyn1 - fyn1*gxn1
+    
+    xv[i] <- xv[i-1]-(gyn1*fn_1 - fyn1*gn_1)/dn_1 #updates xv and yv
+    yv[i] <- yv[i-1]-(fxn1*gn_1 - gxn1*fn_1)/dn_1
+    
+    iff <- abs(f(xv[i],yv[i])) + abs(g(xv[i],yv[i]))  #updates iff
+    
+    i <- i + 1                                 #updates i
+    
+    if(i == 3000){break}                      #Emergency bailout to prevent infinite loop
+  }
+  print(xv[length(xv)]) 
+  return(yv[length(yv)])
+
 }
+Newton()
 
 ```
 
@@ -416,26 +446,33 @@ directpoly <- function(x = 2, coe = c(1,2,3)){
 directpoly()
 ```
 
-#4.4.1.2
-```{r, 4.4.1.2}
+#CH4.2
+```{r, CH4.2}
 hornerpoly <- function(x = c(2,3), coe = c(1,2,3)){
   n <- length(coe)
   a <- matrix(nrow = n,ncol = length(x))
   a[n,] <- coe[n]
-  
+  print(a[n,])
   for(z in 1:length(x)){
   for(j in 1:(n-1)){
-    a[n-j,z] <- x[z]*a[n-j+1] + coe[n-j]
+    a[n-j,z] <- x[z]*a[n-j+1,z] + coe[n-j]
   }
   
   }
+  
+  
   a1s <- (a[1,])
   return(a1s)
 }
-hornerpoly()
 ```
 
-#4.4.1.3
+#4.4.1.3.a
+The system elapsed time is 0.1 for the directpoly function while the horner function used 0.06.
+The latter is faster.
+
+#4.4.1.3.b
+The notation to run this has coe = c(-3,17,2)
+The system elapsed time is 0.03 for the directpoly function while the horner function is 0.05. This time the former is faster, suggesting that we should determine the length of our polynomials before running a function.
 
 
 
