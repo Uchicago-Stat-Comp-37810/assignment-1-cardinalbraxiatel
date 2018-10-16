@@ -1,0 +1,37 @@
+---
+title: "Interview"
+author: "Patrick Walker"
+date: "October 2, 2018"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+#Andrea: A Life Examined
+
+1. In the Beginning
+Born in Beijing, China she would spend her time there until she decided to move to the United States to pursue higher education.
+
+2. Education
+Andrea attended Northwestern University where she obtained a Bachelor of Arts in *Economics and Mathematical Methodologies in the Social Sciences,* which she often shortens to a less impressive title.
+  Her programming skills specifically are best described as an accomplished amateur in Python and R.
+
+3. Hobbies
+Andrea enjoys backpacking and all sorts of hiking as well as eating which I'm sure we can all agree on.
+
+4. The Future
+Alhtough Andrea of course has professional goals of attaining a higher level of employment, she also has a personal goal: to visit all 7 continents before she is 35.
+![alt text](https://mrsdubai.files.wordpress.com/2012/07/map.gif)
+
+5. Favorite Mathematical Formula
+$(1 + 2 + 3 ... +N)^2 = (1^3  + 2^3 + 3^3 ... + N^3)$
+
+```{r, echo=FALSE}
+plot(c(1:7),c(3,2,3,4,2,3,4), main = "Number of Meals per Day", xlab = "Day of Week", ylab = "Number of Meals")
+```
